@@ -120,10 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.cocktailGrid.innerHTML = filtered.map(cocktail => {
       const flavorsHtml = (cocktail.flavorProfile || []).map(f => `<span class="flavor-tag">${f}</span>`).join('');
       const ingredientsSummary = (cocktail.specs || []).map(s => s.name.split('(')[0].trim()).join(' · ');
+      const imageHtml = cocktail.image ? `
+        <div class="card-image-wrap">
+          <img src="${cocktail.image}" alt="${cocktail.name}" class="card-drink-img" loading="lazy">
+        </div>
+      ` : '';
 
       return `
         <div class="cocktail-card" data-id="${cocktail.id}">
           <div>
+            ${imageHtml}
             <div class="card-header">
               <h3 class="card-title">${cocktail.name}</h3>
               <span class="card-spirit-tag">${cocktail.baseSpirit}</span>
@@ -162,6 +168,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openCocktailModal(drink) {
     state.selectedCocktail = drink;
+
+    const modalImg = document.getElementById('modalDrinkImage');
+    const modalImgWrap = document.getElementById('modalImageWrap');
+    if (drink.image && modalImg && modalImgWrap) {
+      modalImg.src = drink.image;
+      modalImg.alt = drink.name;
+      modalImgWrap.style.display = 'block';
+    } else if (modalImgWrap) {
+      modalImgWrap.style.display = 'none';
+    }
 
     elements.modalDrinkName.textContent = drink.name;
     elements.modalDrinkSubtitle.textContent = drink.subtitle || '';
