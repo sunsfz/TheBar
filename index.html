@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Bar - Artisanal Cocktail Library</title>
+  
+  <!-- Fonts: Luxury Serif & Classic Type -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo-wrap">
+        <h1 id="barTitle" class="bar-title">The Bar</h1>
+        <p id="barSubtitle" class="bar-subtitle">Artisanal Libations & Timeless Classics</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    <!-- Discovery & Filter Controls -->
+    <section class="discovery-section">
+      <div class="filter-toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search by drink, spirit, or ingredient (e.g. Bourbon, Vermouth)...">
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="filter-groups">
+          <div class="filter-row">
+            <span class="filter-label">Spirit</span>
+            <div id="spiritPills" class="filter-pills"></div>
+          </div>
+
+          <div class="filter-row">
+            <span class="filter-label">Profile</span>
+            <div id="flavorPills" class="filter-pills"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <span id="drinkCountBadge" style="font-family: var(--font-sans); font-size: 0.8rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.1em;">
+          8 Libations
+        </span>
+      </div>
+    </section>
+
+    <!-- Cocktail Grid -->
+    <section id="cocktailGrid" class="cocktail-grid">
+      <!-- Cocktails rendered dynamically -->
+    </section>
+  </main>
+
+  <!-- Cocktail Detail & Recipe Modal -->
+  <div id="cocktailModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="modalCloseBtn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div class="modal-body">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <h2 id="modalDrinkName" style="font-family: var(--font-serif); font-size: 2rem; color: var(--accent-gold-light); margin-bottom: 2px;"></h2>
+            <p id="modalDrinkSubtitle" style="font-style: italic; color: var(--text-muted); margin-bottom: 12px;"></p>
+          </div>
+          <span id="modalDrinkSpirit" class="card-spirit-tag"></span>
+        </div>
+
+        <div id="modalDrinkFlavors" style="display: flex; gap: 6px; margin-bottom: 16px;"></div>
+
+        <p id="modalDrinkDesc" style="font-size: 1.1rem; line-height: 1.6; color: #d6d6df; margin-bottom: 20px;"></p>
+
+        <!-- Presentation Details -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px; margin-bottom: 24px; font-family: var(--font-sans); font-size: 0.88rem;">
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Glassware</div>
+            <div id="modalDrinkGlass" style="color: var(--accent-gold-light); font-weight: 500;"></div>
+          </div>
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Ice</div>
+            <div id="modalDrinkIce" style="color: var(--accent-gold-light); font-weight: 500;"></div>
+          </div>
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Garnish</div>
+            <div id="modalDrinkGarnish" style="color: var(--accent-gold-light); font-weight: 500;"></div>
+          </div>
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Technique</div>
+            <div id="modalDrinkTechnique" style="color: var(--accent-gold-light); font-weight: 500;"></div>
+          </div>
+        </div>
+
+        <!-- Recipe Specs Header & Unit Toggle -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 class="modal-section-title" style="margin: 0;">Recipe Specs</h3>
+          <div class="unit-toggle-group" style="margin: 0;">
+            <button id="btnUnitOz" class="unit-btn active">oz</button>
+            <button id="btnUnitMl" class="unit-btn">ml</button>
+          </div>
+        </div>
+
+        <!-- Specs Table -->
+        <table id="modalDrinkSpecsTable" class="spec-table">
+          <thead>
+            <tr>
+              <th>Measure</th>
+              <th>Ingredient</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+
+        <!-- Method -->
+        <h3 class="modal-section-title">Preparation</h3>
+        <p id="modalDrinkInstructions" style="font-size: 1.05rem; line-height: 1.6; color: #e2e2ea;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/drinks.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
